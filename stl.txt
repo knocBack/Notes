@@ -1,0 +1,111 @@
+STL
+
+1. Vectors(container) - dynamic array!
+	Ini:
+	vector<int> v; //empty
+	vector<int> v(10); //empty but 10 elements
+	vector<char> v(10,'h'); //10 'h' characters
+
+	Functions:
+	v.push_back(x) - inserts element in end - O(1)
+	v.pop_back(x) - erases last element - O(1)
+	v.clear() - erases all elements - O(n)
+	v.size() - returns current size - O(1)
+	[] -> similar to arrays // v[0] -> first element
+	v.begin(),v.end() //iterators
+
+2. sort() O(NlogN) (function)
+	sort(pntr1,pntr2)
+	->pntr1 : pntr of first element
+	->pntr2 : pntr of next element of the last element
+
+3. Pair (function)
+	-> create a composite datatype composed of 2 primitive/composite datatypes!
+	pair<int,int> p;
+	pair<int,string> p = {4,"hola"};
+	pair<int,pair<int,string>> p;
+	pair<vector<int>,string> p;
+
+	p.first -> first value
+	p.second -> second value
+
+	#it can return multiple values from a function!
+	pair<int,int> fun(){
+		return {1,2};
+	}
+
+	#sorting arrays of pairs 
+	vector<pair<int,int>> v={{4,2},{3,7},{4,5}};
+	sort(v.begin(),v.end()) -> will sort acc. to pair.first !!
+
+4. Sets (container) - keeps unique copy in a sorted order
+	Ini:
+	set<int> s; //empty set of int
+	set<string> s; //empty set of string
+
+	Functions:
+	s.insert(x) - inserts value 'x' if not in set and do nothing if present - O(log N)
+	s.erase(x) - erases the value 'x' from the set if present - O(log N)
+	s.count(x) - returns '0' if not present and '1' if present - O(log N)
+	s.clear() - erases all elements - O(N)
+	s.size() - returns current size of the set - O(1)
+	s.find(x) - returns iterator to element with value 'x' OR returns s.end() if not found - O(log N)
+	s.lower_bound(x) - returns iter. to first element >=x. OR s.end() if none - O(log N)
+	s.upper_bound(x) - returns iter. to the first element which is >x. OR s.end() if none - O(log N)
+	s.erase(iter) - erases the element with iterator iter - O(log N)
+
+	# [] -> doesnt work! wrong: cout<<s[0] -> error!!
+
+	#Set iterators!
+	auto it = s.begin();
+	it++ , it-- , ++it , --it -> O(log N)
+
+
+5. Maps (container) - key-value pair similar to python dictionary
+	Ini:
+	map<key_datatype, value_datatype> m;
+	map<string, int> m;
+	m[key] = value;
+	ex: m["hello"]=40;
+
+	Functions:
+	m.clear() - clears a map
+	m[key] - returns the value! - O(logN)
+	m.find(key),m.erase(key),m.lower_bound(key),m.upper_bound(key),m.size() ---> are similar to that of sets!
+
+	#keys are unique and sorted acc in lexicographical order!
+	#map iterators behave similar to set iterators, but upon doing *it you instead of getting the value, will get a pair of {key, value}
+		Ex:map <string,int> m;
+		m["prashanth"]=1;
+		auto it = m.find("prashanth")
+		it will return pair -> {prashanth,1}
+		so u can use "it->first" to return 'key' and "it.second" to return the 'value'
+	#if element is not present yet u try to print it like cout<<m["proprashanth"]; it will instantly create one with that key and value - '0'
+
+### iterating the containers!
+-> normal way:
+	for(auto it=s.begin();it!=s.end();it++){
+		*it;
+	}
+	// works for all three: sets, map and vector!
+
+-> shorthand:
+	vector<int> v;		set<int> s;			map<int,int> m;
+	for(int x:v){		for(int x:s){		for(pair<int,int> x:s){
+		//x 				//x 				//x
+	}					}					}
+
+### custom_comparator!
+	bool decreasing_order(int x,int y){
+		return x>y;
+	}
+	int a[10];
+	sort(a,a+10,decreasing_order); // sorts in descending order!
+
+//// TO-DO list!
+	queue
+	stack
+	deque
+	priority_queue
+	multiset / multimap -> can store duplicates
+	unordered_set / unordered_map (like HashSet or HashMap in Java!)
